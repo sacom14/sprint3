@@ -1,6 +1,6 @@
 // If you have time, you can move this variable "products" to a json or js file and load the data in this js. It will look more professional
-var products = [
-   {
+const products = [
+    {
         id: 1,
         name: 'cooking oil',
         price: 10.5,
@@ -64,17 +64,21 @@ var products = [
     }
 ]
 // Array with products (objects) added directly with push(). Products in this array are repeated.
-var cartList = [];
+const cartList = [];
 
 // Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
-var cart = [];
+const cart = [];
 
-var total = 0;
+const total = 0;
 
 // Exercise 1
 function buy(id) {
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cartList array
+    products.forEach((product)=>{
+        cartList.push(product);
+        console.log(products);
+});
 }
 
 // Exercise 2
@@ -119,7 +123,7 @@ function removeFromCart(id) {
     // 2. Add found product to the cartList array
 }
 
-function open_modal(){
-	console.log("Open Modal");
-	printCart();
+function open_modal() {
+    console.log("Open Modal");
+    printCart();
 }
