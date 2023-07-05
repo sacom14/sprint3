@@ -69,7 +69,7 @@ let cartList = [];
 // Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
 const cart = [];
 
-let total = 0;
+const total = 0;
 
 // Exercise 1
 function buy(id) {
@@ -79,11 +79,11 @@ function buy(id) {
         return product.id === id;
     });
 
-    if (findProduct){
+    if (findProduct) {
         cartList.push(findProduct);
-        console.log (`${findProduct} agregado al carrito`);
-    } else{
-        console.log ('no se ha podido agregar al carrito.')
+        console.log(`${findProduct} agregado al carrito`);
+    } else {
+        console.log('no se ha podido agregar al carrito.')
     }
 
     console.log(cartList);
@@ -91,7 +91,7 @@ function buy(id) {
 
 // Exercise 2
 function cleanCart() {
-    cartList=[];
+    cartList = [];
     console.log(cartList);
 }
 
@@ -100,19 +100,40 @@ function calculateTotal() {
     // Calculate total price of the cart using the "cartList" array
     let totalPrice = 0;
 
-    for(let i = 0; i < cartList.length; i++){
+    for (let i = 0; i < cartList.length; i++) {
         totalPrice += cartList[i].price;
     }
     console.log(totalPrice);
-    return(totalPrice);
+    return (totalPrice);
 }
 
 // Exercise 4
 function generateCart() {
     // Using the "cartlist" array that contains all the items in the shopping cart, 
     // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
-}
 
+    cartList.forEach(function (product) {
+        var validationCart = cart.find(function (item) {
+            return item.id === product.id;
+        });
+
+        if (validationCart) {
+            // El producto ya existe
+            validationCart.quantity++;
+        } else {
+            // El producto no existe
+            var cartProduct = {
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                quantity: 1
+            };
+            cart.push(cartProduct);
+        }
+    });
+    console.log(cart);
+    return cart;
+}
 // Exercise 5
 function applyPromotionsCart() {
     // Apply promotions to each item in the array "cart"
