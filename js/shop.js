@@ -1,5 +1,5 @@
 // If you have time, you can move this variable "products" to a json or js file and load the data in this js. It will look more professional
-const products = [
+var products = [
     {
         id: 1,
         name: 'cooking oil',
@@ -75,10 +75,16 @@ const total = 0;
 function buy(id) {
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cartList array
-    products.forEach((product)=>{
-        cartList.push(product);
-        console.log(products);
-});
+    let findProduct = products.find((product) => {
+        return product.id === id;
+    });
+
+    if (findProduct){
+        cartList.push(findProduct);
+        console.log (`${findProduct} agregado al carrito`);
+    } else{
+        console.log ('no se ha podido agregar al carrito.')
+    }
 }
 
 // Exercise 2
