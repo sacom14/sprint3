@@ -92,7 +92,8 @@ function buy(id) {
 // Exercise 2
 function cleanCart() {
     cartList = [];
-    console.log(cartList);
+    cart = [];
+    console.log("se ha limpiado la lista");
 }
 
 // Exercise 3
@@ -113,31 +114,70 @@ function generateCart() {
     // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
 
     cartList.forEach(function (product) {
-        var validationCart = cart.find(function (item) {
+        let validationCart = cart.find(function (item) {
             return item.id === product.id;
         });
 
         if (validationCart) {
             // El producto ya existe
             validationCart.quantity++;
+            validationCart.subtotal += product.price;
+            validationCart.subtotalWithDiscount += product.price;
         } else {
             // El producto no existe
-            var cartProduct = {
+            let cartProduct = {
                 id: product.id,
                 name: product.name,
                 price: product.price,
-                quantity: 1
+                quantity: 1,
+                subtotal: product.price,
+                subtotalWithDiscount: product.price,
             };
             cart.push(cartProduct);
         }
+
+
+
     });
+
+    let oilDiscount = applyPromotionsCartOil();
+    let cakeDiscount = applyPromotionsCartCake();
     console.log(cart);
     return cart;
 }
 // Exercise 5
-function applyPromotionsCart() {
+function applyPromotionsCartOil() {
     // Apply promotions to each item in the array "cart"
+    // comprar 3 o més oli, descompte de 10 euros.
+
+    products.forEach(function (product) {
+        if (product.id === 1) {
+            cart.forEach(function (item) {
+                if (item.id === 1 && item.quantity >= product.offer.number) {
+                    item.subtotalWithDiscount -= ((item.subtotalWithDiscount * product.offer.percent) / 100);
+                };
+            });
+        };
+    });
+    console.log(cart);
 }
+
+function applyPromotionsCartCake() {
+    //compra de 10 o més Instant cupcake mixture el preu es rebaixa a 2/3 del total.
+    
+    products.forEach(function (product) {
+        if (product.id === 3) {
+            cart.forEach(function (item) {
+                if (item.id === 3 && item.quantity >= product.offer.number) {
+                    item.subtotalWithDiscount -= ((item.subtotalWithDiscount * product.offer.percent) / 100);
+                };
+            });
+        };
+    });
+    console.log(cart);
+
+}
+
 
 // Exercise 6
 function printCart() {
