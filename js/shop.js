@@ -1,5 +1,5 @@
 // If you have time, you can move this variable "products" to a json or js file and load the data in this js. It will look more professional
-var products = [
+let products = [
     {
         id: 1,
         name: 'cooking oil',
@@ -67,7 +67,7 @@ var products = [
 let cartList = [];
 
 // Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
-const cart = [];
+let cart = [];
 
 const total = 0;
 
@@ -97,16 +97,27 @@ function cleanCart() {
 }
 
 // Exercise 3
-function calculateTotal() {
+function calculateTotalwithoutDiscount() {
     // Calculate total price of the cart using the "cartList" array
-    let totalPrice = 0;
-
+    // sin descuento
+    let finalPrice = 0;
     for (let i = 0; i < cartList.length; i++) {
-        totalPrice += cartList[i].price;
+        finalPrice += cartList[i].price;
     }
-    console.log(totalPrice);
-    return (totalPrice);
+    return (finalPrice);
+};
+
+function calculateTotalwithDiscount() {
+    //con descuento
+    let finalPrice = 0;
+    for (let i = 0; i < cart.length; i++) {
+        finalPrice += cart[i].subtotalWithDiscount;
+
+    };
+    return (finalPrice);
 }
+
+
 
 // Exercise 4
 function generateCart() {
@@ -135,9 +146,6 @@ function generateCart() {
             };
             cart.push(cartProduct);
         }
-
-
-
     });
 
     let oilDiscount = applyPromotionsCartOil();
@@ -164,7 +172,7 @@ function applyPromotionsCartOil() {
 
 function applyPromotionsCartCake() {
     //compra de 10 o més Instant cupcake mixture el preu es rebaixa a 2/3 del total.
-    
+
     products.forEach(function (product) {
         if (product.id === 3) {
             cart.forEach(function (item) {
@@ -178,10 +186,42 @@ function applyPromotionsCartCake() {
 
 }
 
-
 // Exercise 6
 function printCart() {
     // Fill the shopping cart modal manipulating the shopping cart dom
+    const modal = document.getElementById("cartModal");
+    const tbody = document.getElementById("cart_list");
+    const totalPrice = document.getElementById("total_price");
+
+    tbody.innerHTML = "";
+    totalPrice.innerHTML="";
+
+    cart.forEach((item)=>{
+
+        let fila = document.createElement("tr");
+
+        const productCell = document.createElement("th");
+        productCell.setAttribute("scope", "row");
+        productCell.textContent = item.name;
+
+        const productPrice = document.createElement("td");
+        productPrice.textContent = item.price.toFixed(2) + "€";
+        const producQuantity = document.createElement("td");
+        producQuantity.textContent = item.quantity;
+        const totalPriceProduct = document.createElement("td");
+        totalPriceProduct.textContent = item.subtotalWithDiscount.toFixed(2) + "€";
+
+        fila.appendChild(productCell);
+        fila.appendChild(productPrice);
+        fila.appendChild(producQuantity);
+        fila.appendChild(totalPriceProduct);
+
+        tbody.appendChild(fila);
+
+
+    });
+    const totalPriceDiscount = calculateTotalwithDiscount().toFixed(2);
+    totalPrice.textContent = totalPriceDiscount + "€";
 }
 
 
