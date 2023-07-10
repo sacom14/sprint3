@@ -73,20 +73,20 @@ const total = 0;
 
 // Exercise 1
 function buy(id) {
-    // 1. Loop for to the array products to get the item to add to cart
-    // 2. Add found product to the cartList array
-    let findProduct = products.find((product) => {
-        return product.id === id;
-    });
+    // // 1. Loop for to the array products to get the item to add to cart
+    // // 2. Add found product to the cartList array
+    // let findProduct = products.find((product) => {
+    //     return product.id === id;
+    // });
 
-    if (findProduct) {
-        cartList.push(findProduct);
-        console.log(`${findProduct} agregado al carrito`);
-    } else {
-        console.log('no se ha podido agregar al carrito.')
-    }
+    // if (findProduct) {
+    //     cartList.push(findProduct);
+    //     console.log(`${findProduct} agregado al carrito`);
+    // } else {
+    //     console.log('no se ha podido agregar al carrito.')
+    // }
 
-    console.log(cartList);
+    // console.log(cartList);
 }
 
 // Exercise 2
@@ -119,39 +119,40 @@ function calculateTotalwithDiscount() {
 
 
 
-// Exercise 4
+// // Exercise 4
 function generateCart() {
-    // Using the "cartlist" array that contains all the items in the shopping cart, 
-    // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
+//     // Using the "cartlist" array that contains all the items in the shopping cart, 
+//     // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
 
-    cartList.forEach(function (product) {
-        let validationCart = cart.find(function (item) {
-            return item.id === product.id;
-        });
+//     cartList.forEach(function (product) {
+//         let validationCart = cart.find(function (item) {
+//             return item.id === product.id;
+//         });
 
-        if (validationCart) {
-            // El producto ya existe
-            validationCart.quantity++;
-            validationCart.subtotal += product.price;
-            validationCart.subtotalWithDiscount += product.price;
-        } else {
-            // El producto no existe
-            let cartProduct = {
-                id: product.id,
-                name: product.name,
-                price: product.price,
-                quantity: 1,
-                subtotal: product.price,
-                subtotalWithDiscount: product.price,
-            };
-            cart.push(cartProduct);
-        }
-    });
+//         if (validationCart) {
+//             // El producto ya existe
+//             validationCart.quantity++;
+//             validationCart.subtotal += product.price;
+//             validationCart.subtotalWithDiscount += product.price;
+//         } else {
+//             // El producto no existe
+//             let cartProduct = {
+//                 id: product.id,
+//                 name: product.name,
+//                 price: product.price,
+//                 quantity: 1,
+//                 subtotal: product.price,
+//                 subtotalWithDiscount: product.price,
+//             };
+//             cart.push(cartProduct);
+//         }
+//     });
 
-    let oilDiscount = applyPromotionsCartOil();
-    let cakeDiscount = applyPromotionsCartCake();
-    console.log(cart);
-    return cart;
+//     let oilDiscount = applyPromotionsCartOil();
+//     let cakeDiscount = applyPromotionsCartCake();
+//     console.log(cart);
+//     return cart;
+
 }
 // Exercise 5
 function applyPromotionsCartOil() {
@@ -232,6 +233,34 @@ function addToCart(id) {
     // Refactor previous code in order to simplify it 
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cart array or update its quantity in case it has been added previously.
+    let findProduct = products.find((product) => product.id === id);
+
+    if (findProduct) {
+        let validationCart = cart.find((item) => item.id === findProduct.id);
+        if (validationCart) {
+            // El producto ya existe
+            validationCart.quantity++;
+            validationCart.subtotal += findProduct.price;
+            validationCart.subtotalWithDiscount += findProduct.price;
+        } else {
+            // El producto no existe
+            let cartProduct = {
+                id: findProduct.id,
+                name: findProduct.name,
+                price: findProduct.price,
+                quantity: 1,
+                subtotal: findProduct.price,
+                subtotalWithDiscount: findProduct.price,
+            };
+            cart.push(cartProduct);
+        }
+
+        console.log(`${findProduct.name} agregado al carrito`);
+    }
+    let oilDiscount = applyPromotionsCartOil();
+    let cakeDiscount = applyPromotionsCartCake();
+    console.log(cart);
+
 }
 
 // Exercise 9
@@ -243,5 +272,6 @@ function removeFromCart(id) {
 function open_modal() {
     console.log("Open Modal");
     generateCart();
+    // addToCart();
     printCart();
 }
