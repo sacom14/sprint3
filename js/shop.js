@@ -121,41 +121,41 @@ function calculateTotalwithDiscount() {
 
 // // Exercise 4
 function generateCart() {
-//     // Using the "cartlist" array that contains all the items in the shopping cart, 
-//     // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
+    //     // Using the "cartlist" array that contains all the items in the shopping cart, 
+    //     // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
 
-//     cartList.forEach(function (product) {
-//         let validationCart = cart.find(function (item) {
-//             return item.id === product.id;
-//         });
+    //     cartList.forEach(function (product) {
+    //         let validationCart = cart.find(function (item) {
+    //             return item.id === product.id;
+    //         });
 
-//         if (validationCart) {
-//             // El producto ya existe
-//             validationCart.quantity++;
-//             validationCart.subtotal += product.price;
-//             validationCart.subtotalWithDiscount += product.price;
-//         } else {
-//             // El producto no existe
-//             let cartProduct = {
-//                 id: product.id,
-//                 name: product.name,
-//                 price: product.price,
-//                 quantity: 1,
-//                 subtotal: product.price,
-//                 subtotalWithDiscount: product.price,
-//             };
-//             cart.push(cartProduct);
-//         }
-//     });
+    //         if (validationCart) {
+    //             // El producto ya existe
+    //             validationCart.quantity++;
+    //             validationCart.subtotal += product.price;
+    //             validationCart.subtotalWithDiscount += product.price;
+    //         } else {
+    //             // El producto no existe
+    //             let cartProduct = {
+    //                 id: product.id,
+    //                 name: product.name,
+    //                 price: product.price,
+    //                 quantity: 1,
+    //                 subtotal: product.price,
+    //                 subtotalWithDiscount: product.price,
+    //             };
+    //             cart.push(cartProduct);
+    //         }
+    //     });
 
-//     let oilDiscount = applyPromotionsCartOil();
-//     let cakeDiscount = applyPromotionsCartCake();
-//     console.log(cart);
-//     return cart;
+    //     let oilDiscount = applyPromotionsCartOil();
+    //     let cakeDiscount = applyPromotionsCartCake();
+    //     console.log(cart);
+    //     return cart;
 
 }
 // Exercise 5
-function applyPromotionsCartOil() {
+function applyPromotionsCartOil(id) {
     // Apply promotions to each item in the array "cart"
     // comprar 3 o més oli, descompte de 10 euros.
 
@@ -163,7 +163,9 @@ function applyPromotionsCartOil() {
         if (product.id === 1) {
             cart.forEach(function (item) {
                 if (item.id === 1 && item.quantity >= product.offer.number) {
-                    item.subtotalWithDiscount -= ((item.subtotalWithDiscount * product.offer.percent) / 100);
+                    item.subtotalWithDiscount -= ((item.subtotal * product.offer.percent) / 100);
+                } else if (item.id === 1 && item.quantity < product.offer.number) {
+                    item.subtotalWithDiscount = (product.price * item.quantity);
                 };
             });
         };
@@ -171,7 +173,7 @@ function applyPromotionsCartOil() {
     console.log(cart);
 }
 
-function applyPromotionsCartCake() {
+function applyPromotionsCartCake(id) {
     //compra de 10 o més Instant cupcake mixture el preu es rebaixa a 2/3 del total.
 
     products.forEach(function (product) {
@@ -179,6 +181,8 @@ function applyPromotionsCartCake() {
             cart.forEach(function (item) {
                 if (item.id === 3 && item.quantity >= product.offer.number) {
                     item.subtotalWithDiscount -= ((item.subtotalWithDiscount * product.offer.percent) / 100);
+                } else if (item.id === 3 && item.quantity < product.offer.number) {
+                    item.subtotalWithDiscount = (product.price * item.quantity);
                 };
             });
         };
@@ -195,9 +199,9 @@ function printCart() {
     const totalPrice = document.getElementById("total_price");
 
     tbody.innerHTML = "";
-    totalPrice.innerHTML="";
+    totalPrice.innerHTML = "";
 
-    cart.forEach((item)=>{
+    cart.forEach((item) => {
 
         let fila = document.createElement("tr");
 
@@ -241,7 +245,7 @@ function addToCart(id) {
             // El producto ya existe
             validationCart.quantity++;
             validationCart.subtotal += findProduct.price;
-            validationCart.subtotalWithDiscount += findProduct.price;
+            validationCart.subtotalWithDiscount = validationCart.subtotal;
         } else {
             // El producto no existe
             let cartProduct = {
@@ -254,11 +258,13 @@ function addToCart(id) {
             };
             cart.push(cartProduct);
         }
-
         console.log(`${findProduct.name} agregado al carrito`);
+        if (findProduct.id === 1) {
+            let oilDiscount = applyPromotionsCartOil();
+        } else if (findProduct.id === 3) {
+            let cakeDiscount = applyPromotionsCartCake();
+        }
     }
-    let oilDiscount = applyPromotionsCartOil();
-    let cakeDiscount = applyPromotionsCartCake();
     console.log(cart);
 
 }
@@ -267,6 +273,30 @@ function addToCart(id) {
 function removeFromCart(id) {
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cartList array
+    let findProduct = products.find((product) => product.id === id);
+
+    if (findProduct) {
+        let validationCart = cart.find((item) => item.id === findProduct.id);
+        if (validationCart) {
+            // El producto ya existe
+            validationCart.quantity--;
+            validationCart.subtotal -= findProduct.price;
+            validationCart.subtotalWithDiscount = validationCart.subtotal;
+            if (validationCart.quantity == 0) {
+                cart = cart.filter(item => item.id != validationCart.id);
+                console.log(`${findProduct.name} Se ha quitado del carrito`);
+            };
+            if (findProduct.id === 1) {
+                let oilDiscount = applyPromotionsCartOil();
+            } else if (findProduct.id === 3) {
+                let cakeDiscount = applyPromotionsCartCake();
+            };
+        };
+    };
+
+
+    console.log(cart);
+
 }
 
 function open_modal() {
