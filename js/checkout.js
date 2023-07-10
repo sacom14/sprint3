@@ -1,16 +1,17 @@
 
 // Exercise 7
 function validate() {
-	const error = 0;
+	let error = 0;
 	// Get the input fields
-	const fName = document.getElementById("fName");
-	const fEmail = document.getElementById("fEmail");
-	const fAddress = document.getElementById("fAddress");
-	const fLastN = document.getElementById("fLastN");
-	const fPassword = document.getElementById("fPassword");
-	const fPhone = document.getElementById("fPhone");
-	
-	const form = document.querySelector(".form");
+	let fName = document.getElementById("fName").value;
+	const fEmail = document.getElementById("fEmail").value;
+	const fAddress = document.getElementById("fAddress").value;
+	const fLastN = document.getElementById("fLastN").value;
+	const fPassword = document.getElementById("fPassword").value;
+	const fPhone = document.getElementById("fPhone").valueAsNumber;
+
+	const form = document.getElementById("form"); //accedemos al formulario a través de la id.
+	const input = document.querySelectorAll(".form input"); //accedemos a todos los imputs que estan dentro de la id form. Por eso ponemos el ALl.
 
 
 
@@ -24,39 +25,56 @@ function validate() {
 
 
 	// Validate fields entered by the user: name,last name, address, phone, password, and email
-	let message = "";
-	// Name validation
-	if (fName.value.length < 3) {
-		message = "This field is required and must have, at least, 3 characters";
-		errorName.innerHTML = message;
-		console.log(message);
-		// error++;
-	}
-	// Email validation
-	if (fEmail.value.length < 3) {
-		// error++;
-	}
-	// Address validation
-	if (fAddress.value.length <3){
+	//Name validation
+	let nameValidation =/^[a-zA-Z]{3,}$/;
+	if (nameValidation.test(fName)) {
+		console.log("All fine name");
+	}else{
+		console.log("This field is required and must have, only letters, and at least 3 characters");
+	};
 
+	// Email validatiom
+	let emailValidation = /^[a-zA-Z0-9._-]{3,}@[a-zA-Z0-9]{2,10}\.[a-zA-Z]{2,5}$/;
+	if (emailValidation.test(fEmail)) {
+		console.log("All fine email");
+	} else {
+		console.log("This field is required and must contain an '@' and have, at least, 3 characters. Exemple: asd._re@gmail.com");
+	};
+
+	// Address validation
+	let addressValidation = /^[a-zA-Z]{3,}$/;
+	if (addressValidation.test(fAddress)) {
+		console.log ("All fine address")
+	}else{
+		console.log("This field is required and must have, at least, 3 characters");
 	}
+
 	// Last Name validation
-	if (fLastN.value.length < 3){
-		
-	}
+	let lastNameValidation =/^[a-zA-Z]{3,}$/;
+	if (lastNameValidation.test(fLastN)) {
+		console.log("All fine lastName");
+	}else{
+		console.log("This field is required and must have, only letters, and at least 3 characters");
+	};
 
 	// Password validation
-	if (fPassword.value.length <3){
-		
+	let passwordValidation = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^\s]{3,8}$/;
+	if (passwordValidation.test(fPassword)) {
+		console.log("All fine password");
+	}else{
+		console.log("This field is required and between 3 to 8 characters, must have lowecase, uppercase and numbers");
 	}
 
 	// Phone validation
-	if (fPhone.value.length <3){
-		
+	let phoneValidation = /^\d{3,9}$/;
+	if (phoneValidation.test(fPhone)) {
+		console.log("All fine phone")
+	}else{
+		console.log("This field is required and between 3 to 9 characters, must have only numbers.")
 	}
 
 
-// esta prederminado
+	// esta prederminado
 	// if (error > 0) {
 	// 	alert("Error");
 	// } else {
