@@ -264,7 +264,9 @@ function addToCart(id) {
         } else if (findProduct.id === 3) {
             let cakeDiscount = applyPromotionsCartCake();
         }
+        let addProduct = countProduct();
     }
+    
     console.log(cart);
 
 }
@@ -292,6 +294,7 @@ function removeFromCart(id) {
                 let cakeDiscount = applyPromotionsCartCake();
             };
         };
+        let removeProduct = countProduct();
     };
 
 
@@ -304,4 +307,17 @@ function open_modal() {
     generateCart();
     // addToCart();
     printCart();
+
+}
+
+//Extra exercice count_product
+//addProducts and removeProducts function
+function countProduct(){
+    let countProduct = document.getElementById("count_product");
+    let totalProducts = 0;
+
+    for (let i = 0; i < cart.length; i++) {
+        totalProducts += cart[i].quantity;
+    }
+    countProduct.textContent = totalProducts;
 }
