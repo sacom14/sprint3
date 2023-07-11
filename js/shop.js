@@ -214,12 +214,15 @@ function printCart() {
         const producQuantity = document.createElement("td");
         producQuantity.textContent = item.quantity;
         const totalPriceProduct = document.createElement("td");
-        totalPriceProduct.textContent = item.subtotalWithDiscount.toFixed(2) + "€";
+        totalPriceProduct.textContent = item.subtotal.toFixed(2) + "€";
+        const totalWithDiscount = document.createElement("td");
+        totalWithDiscount.textContent = item.subtotalWithDiscount.toFixed(2) + "€"; //lo he añadido nuevo.
 
         fila.appendChild(productCell);
         fila.appendChild(productPrice);
         fila.appendChild(producQuantity);
         fila.appendChild(totalPriceProduct);
+        fila.appendChild(totalWithDiscount);
 
         tbody.appendChild(fila);
 
