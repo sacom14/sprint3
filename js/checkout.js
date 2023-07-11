@@ -1,165 +1,97 @@
-
 // Exercise 7
-const _submit = document.getElementById("btn");
+const form = document.getElementById("form"); //accedemos al formulario a través del id.
+const input = document.querySelectorAll("#form input")
 
-function validate() {
-	// event.preventDefault();//Evita el envio de formulario por defecto.
-	// Get the input fields
-
-	const _form = document.getElementById("form"); //accedemos al formulario a través de la id.
-	const _input = document.querySelectorAll(".form input"); //accedemos a todos los imputs que estan dentro de la id form. Por eso ponemos el ALl.
-
-
-	const _fName = document.getElementById("fName").value;
-	const _fEmail = document.getElementById("fEmail").value;
-	const _fAddress = document.getElementById("fAddress").value;
-	const _fLastN = document.getElementById("fLastN").value;
-	const _fPassword = document.getElementById("fPassword").value;
-	const _fPhone = document.getElementById("fPhone").valueAsNumber;
-
-	// Get the error elements
-	const _errorName = document.getElementById("errorName");
-	const _errorEmail = document.getElementById("errorEmail");
-	const _errorAddress = document.getElementById("errorAddress");
-	const _errorLastN = document.getElementById("errorLastN");
-	const _errorPassword = document.getElementById("errorPassword");
-	const _errorPhone = document.getElementById("errorPhone");
-
-	// Validate fields entered by the user: name,last name, address, phone, password, and email
-	//name validation
-	let nameValidation= /^[a-zA-Z]{3,}$/;
-	if (nameValidation.test(_fName)) {
-		console.log("All fine name");
-	} else {
-		console.log("This field is required and must have, only letters, and at least 3 characters");
-		_errorName.textContent = "This field is required and must have, only letters, and at least 3 characters";
-	};
-
-	// Email validatiom
-	let emailValidation = /^[a-zA-Z0-9._-]{3,}@[a-zA-Z0-9]{2,10}\.[a-zA-Z]{2,5}$/;
-	if (emailValidation.test(_fEmail)) {
-		console.log("All fine email");
-	} else {
-		console.log("This field is required and must contain an '@' and have, at least, 3 characters. Exemple: asd._re@gmail.com");
-		_errorEmail.textContent = "This field is required and must contain an '@' and have, at least, 3 characters. Exemple: asd._re@gmail.com";
-	};
-
-	// Address validation
-	let addressValidation = /^[a-zA-Z]{3,}$/;
-	if (addressValidation.test(_fAddress)) {
-
-		console.log("All fine address");
-	} else {
-		console.log("This field is required and must have, at least, 3 characters");
-		_errorAddress.textContent = "This field is required and must have, at least, 3 characters";
-	}
-
-	// Last Name validation
-	let lastNameValidation = /^[a-zA-Z]{3,}$/;
-	if (lastNameValidation.test(_fLastN)) {
-		console.log("All fine lastName");
-	} else {
-		console.log("This field is required and must have, only letters, and at least 3 characters");
-		_errorLastN.textContent = "This field is required and must have, only letters, and at least 3 characters";
-	};
-
-	// Password validation
-	let passwordValidation = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^\s]{3,8}$/;
-	if (passwordValidation.test(_fPassword)) {
-		console.log("All fine password");
-	} else {
-		console.log("This field is required and between 3 to 8 characters, must have lowecase, uppercase and numbers");
-		_errorPassword.textContent = "This field is required and between 3 to 8 characters, must have lowecase, uppercase and numbers";
-	}
-
-	// Phone validation
-	let phoneValidation = /^\d{3,9}$/;
-	if (phoneValidation.test(_fPhone)) {
-		console.log("All fine phone");
-	} else {
-		console.log("This field is required and between 3 to 9 characters, must have only numbers.");
-		_errorPhone.textContent = "This field is required and between 3 to 9 characters, must have only numbers.";
-	}
-
-	//required
-	//name 
-	if (_fName === "") {
-		alert("The name is required");
-		return false;
-	}
-	//email
-	if (_fEmail === "") {
-		alert("The email is required");
-		return false;
-	}
-	//address
-	if (_fAddress === "") {
-		alert("The address is required");
-		return false;
-	}
-	//last name
-	if (_fLastN === "") {
-		alert("The last name is required");
-		return false;
-	}
-	//password
-	if (_fPassword === "") {
-		alert("The password is required");
-		return false;
-	}
-	if (_fPhone === "") {
-		alert("The phone is required");
-		return false;
-	}
-
-	// //name test
-	// if (!nameValidation.test(_fName)) {
-	// 	console.log("This field is required and must have, only letters, and at least 3 characters");
-	// 	_fName.style.border = "1px solid red";
-	// 	return false;
-	// }
-	// if (!emailValidation.test(_fEmail)) {
-	// 	console.log("This field is required and must contain an '@' and have, at least, 3 characters. Exemple: asd._re@gmail.com")
-	// 	_fEmail.style.border = "1px solid red";
-	// 	return false;
-	// }
-
-	// if (!addressValidation.test(_fAddress)) {
-	// 	console.log("This field is required and must have, at least, 3 characters");
-	// 	_fAddress.style.border = "1px solid red";
-	// 	return false;
-	// }
-	// if (!lastNameValidation.test(_fLastN)) {
-	// 	console.log("This field is required and must have, only letters, and at least 3 characters");
-	// 	_fLastN.style.border = "1px solid red";
-	// 	return false;
-	// }
-	// if (!passwordValidation.test(_fPassword)) {
-	// 	console.log("This field is required and between 3 to 8 characters, must have lowecase, uppercase and numbers");
-	// 	// _fPassword.style.border ="1px solid red";
-	// 	return false;
-	// }
-	// if (!phoneValidation.test(_fPhone)) {
-	// 	console.log("This field is required and between 3 to 9 characters, must have only numbers.");
-	// 	_fPhone.style.border = "1px solid red";
-	// 	return false;
-	// }
-	// return true;
-
-
-	// esta prederminado
-	// if (error > 0) {
-	// 	alert("Error");
-	// } else {
-	// 	alert("OK");
-	// }
-
+//Expresiones regulares para cada una de los inputs.
+const validations = {
+    fName: /^[a-zA-Z]{3,}$/,//minimo 3 caracteres y solamente se peuden letras.
+    fEmail: /^[a-zA-Z0-9._-]{3,}@[a-zA-Z0-9]{2,10}\.[a-zA-Z]{2,5}$/, //se pueden letras, número _ . - mínimo 3 caracteres. @ y minimo 2 caracteres + . + minimo2 caracteres.
+    fAddress: /^[a-zA-Z0-9]{3,}$/, //mínimo 3 caracteres.
+    fLastN: /^[a-zA-Z]{3,}$/, //mínimo 3 caracteres y solamente se pueden letras.
+    fPassword: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^\s]{3,8}$/,//mínimo 1 minúscula, 1 mayúscula y un número. Máximo 8 caracteres.
+    fPhone: /^\d{9}$/ //Debe tener 9 dígitos.
 }
-//Events
 
-document.addEventListener("click", (e) => {
-	if (e.target === _submit) {
-		e.preventDefault();
-		console.log("esta funcionando");
-	}
+//required
+//marcar que todos son falsos en un principio porque estan incorrectos, através de "itemvalidation() se convertira, en true o false.".
+let inputBoolean = {
+    fName: false,
+    fEmail: false,
+    fAddress: false,
+    fLastN: false,
+    fPassword: false,
+    fPhone: false,
+}
+
+const formValidation = (e) => { //identificamos en que input se ejecuta el evento (e). 
+    switch (e.target.id) {
+        case "fName":
+            itemValidation(validations.fName, e.target, e.target.id); //se envia los siguientes parámetros.
+            break;
+        case "fEmail":
+            itemValidation(validations.fEmail, e.target, e.target.id);
+            break;
+        case "fAddress":
+            itemValidation(validations.fAddress, e.target, e.target.id);
+            break;
+        case "fLastN":
+            itemValidation(validations.fLastN, e.target, e.target.id);
+            break;
+        case "fPassword":
+            itemValidation(validations.fPassword, e.target, e.target.id);
+            break;
+        case "fPhone":
+            itemValidation(validations.fPhone, e.target, "fPhone");
+            break;
+    }
+}
+
+const itemValidation = (validations, input, id,) => { //le pasamos validation, el input (el valor del input) y la id).
+    if (validations.test(input.value)) {
+        document.getElementById(`${id}`).classList.remove("is-invalid"); //se quita la classe is-invalid.
+        document.getElementById(`${id}`).classList.add("is-valid"); //se añade la clase is-valid.
+        // document.querySelector(".invalid-feedback").classList.remove("d-block"); //se usa la classe invalid-feedback para quitar y añadir el texto.
+        inputBoolean[id] = true;
+    } else {
+        document.getElementById(`${id}`).classList.add("is-invalid");
+        document.getElementById(`${id}`).classList.remove("is-valid");
+        // document.querySelector(".invalid-feedback").classList.add("d-block"); //se añade la clase display block de boostrap.
+        inputBoolean[id] = false;
+    }
+}
+
+input.forEach((input) => {
+    input.addEventListener("keyup", formValidation) //cuando se levante la tecla, se ejecutará la función "formValidation" //keyup => es cuando se levanta la tecla.
+    console.log("asdasdsadas");
+    input.addEventListener("blur", formValidation); //blur, es que se ejecute si le da click fuera del input.
+});
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault(); //event para evitar que se envie el formulario antes de tiempo.
+
+    if (inputBoolean.fName && inputBoolean.fEmail && inputBoolean.fAddress && inputBoolean.fLastN && inputBoolean.fPassword && inputBoolean.fPhone) {
+        // document.getElementById("invalidMessage").classList.add("invisible") //esconde el mensaje de invalid
+        form.reset(); //se resetea todo el formulario en cuanto se envia la información
+        //Lo de abajo, es para eliminar la clase is-valid para que desaparezca también en cuanto depararezca toda la información.
+        document.querySelectorAll(".is-valid").forEach((input) => { //seleccionamos la classes en All. indicamos que es del input.
+            input.classList.remove("is-valid");//y cogemos todas las classlits, dentro de input
+        });
+
+        document.getElementById("validMessage").innerHTML ="Your form was submitted successfully!" //aparece si esta todo correcto
+        document.getElementById("validMessage").classList.add("text-success"); //letras verdes
+        document.getElementById("validMessage").classList.remove("invisible"); ////hacemos que desaparexca la classe invisible para que aparezca el mensaje
+        setTimeout(()=>{ //función flecha para hacer aparecer un mensaje durante un tiemmpo determinado
+            document.getElementById("validMessage").classList.add("invisible");//hacemos que se elimine la classse sinvisble para que vuelva a aparecer a los 5 segundos respués del mensaje.
+        }, 5000); //después de la coma va el tiempo que durará el mensaje en pantalla.
+        
+
+    } else {
+        document.getElementById("invalidMessage").innerHTML = "You have to fill in all the fields of the form "; //aparece si hay algun campo que falta por rellenar
+        document.getElementById("invalidMessage").classList.add("text-danger");
+        document.getElementById("invalidMessage").classList.remove("invisible");//hacemos que desaparexca la classe invisible para que aparezca el mensaje
+        setTimeout(() => {//función flecha para hacer aparecer un mensaje durante un tiemmpo determinado
+            document.getElementById("invalidMessage").classList.add("invisible"); //hacemos que se elimine la classse sinvisble para que vuelva a aparecer a los 5 segundos respués del mensaje.
+        }, 5000); //después de la coma va el tiempo que durará el mensaje en pantalla.
+
+    }
 });
