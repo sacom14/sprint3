@@ -62,7 +62,6 @@ const itemValidation = (validations, input, id,) => { //le pasamos validation, e
 
 input.forEach((input) => {
     input.addEventListener("keyup", formValidation) //cuando se levante la tecla, se ejecutará la función "formValidation" //keyup => es cuando se levanta la tecla.
-    console.log("asdasdsadas");
     input.addEventListener("blur", formValidation); //blur, es que se ejecute si le da click fuera del input.
 });
 

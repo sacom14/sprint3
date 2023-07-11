@@ -81,19 +81,14 @@ function buy(id) {
 
     // if (findProduct) {
     //     cartList.push(findProduct);
-    //     console.log(`${findProduct} agregado al carrito`);
-    // } else {
-    //     console.log('no se ha podido agregar al carrito.')
     // }
 
-    // console.log(cartList);
 }
 
 // Exercise 2
 function cleanCart() {
     cartList = [];
     cart = [];
-    console.log("se ha limpiado la lista");
 }
 
 // Exercise 3
@@ -150,7 +145,6 @@ function generateCart() {
 
     //     let oilDiscount = applyPromotionsCartOil();
     //     let cakeDiscount = applyPromotionsCartCake();
-    //     console.log(cart);
     //     return cart;
 
 }
@@ -170,7 +164,6 @@ function applyPromotionsCartOil(id) {
             });
         };
     });
-    console.log(cart);
 }
 
 function applyPromotionsCartCake(id) {
@@ -187,7 +180,6 @@ function applyPromotionsCartCake(id) {
             });
         };
     });
-    console.log(cart);
 
 }
 
@@ -261,7 +253,6 @@ function addToCart(id) {
             };
             cart.push(cartProduct);
         }
-        console.log(`${findProduct.name} agregado al carrito`);
         if (findProduct.id === 1) {
             let oilDiscount = applyPromotionsCartOil();
         } else if (findProduct.id === 3) {
@@ -269,8 +260,6 @@ function addToCart(id) {
         }
         let addProduct = countProduct();
     }
-    
-    console.log(cart);
 
 }
 
@@ -289,7 +278,6 @@ function removeFromCart(id) {
             validationCart.subtotalWithDiscount = validationCart.subtotal;
             if (validationCart.quantity == 0) {
                 cart = cart.filter(item => item.id != validationCart.id);
-                console.log(`${findProduct.name} Se ha quitado del carrito`);
             };
             if (findProduct.id === 1) {
                 let oilDiscount = applyPromotionsCartOil();
@@ -300,13 +288,9 @@ function removeFromCart(id) {
         let removeProduct = countProduct();
     };
 
-
-    console.log(cart);
-
 }
 
 function open_modal() {
-    console.log("Open Modal");
     generateCart();
     // addToCart();
     printCart();
@@ -315,7 +299,7 @@ function open_modal() {
 
 //Extra exercice count_product
 //addProducts and removeProducts function
-function countProduct(){
+function countProduct() {
     let countProduct = document.getElementById("count_product");
     let totalProducts = 0;
 
