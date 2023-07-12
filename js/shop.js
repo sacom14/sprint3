@@ -86,10 +86,15 @@ function buy(id) {
 }
 
 // Exercise 2
+
+
 function cleanCart() {
     cartList = [];
     cart = [];
+    printCart();
+    countProduct();
 }
+
 
 // Exercise 3
 function calculateTotalwithoutDiscount() {
@@ -267,7 +272,7 @@ function addToCart(id) {
 function removeFromCart(id) {
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cartList array
-    let findProduct = products.find((product) => product.id === id);
+    const findProduct = products.find((product) => product.id === id);
 
     if (findProduct) {
         let validationCart = cart.find((item) => item.id === findProduct.id);
