@@ -76,13 +76,13 @@ form.addEventListener("submit", (e) => {
             input.classList.remove("is-valid");//y cogemos todas las classlits, dentro de input
         });
 
-        document.getElementById("validMessage").innerHTML ="Your form was submitted successfully!" //aparece si esta todo correcto
+        document.getElementById("validMessage").innerHTML = "Your form was submitted successfully!" //aparece si esta todo correcto
         document.getElementById("validMessage").classList.add("text-success"); //letras verdes
         document.getElementById("validMessage").classList.remove("invisible"); ////hacemos que desaparexca la classe invisible para que aparezca el mensaje
-        setTimeout(()=>{ //función flecha para hacer aparecer un mensaje durante un tiemmpo determinado
+        setTimeout(() => { //función flecha para hacer aparecer un mensaje durante un tiemmpo determinado
             document.getElementById("validMessage").classList.add("invisible");//hacemos que se elimine la classse sinvisble para que vuelva a aparecer a los 5 segundos respués del mensaje.
         }, 5000); //después de la coma va el tiempo que durará el mensaje en pantalla.
-        
+
 
     } else {
         document.getElementById("invalidMessage").innerHTML = "You have to fill in all the fields of the form "; //aparece si hay algun campo que falta por rellenar
